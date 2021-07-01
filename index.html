@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" href="./static/font/bilibli.png">
+    <title>pilipili</title>
+    <style>
+        body,
+        ul,
+        li,
+        a,
+        p,
+        span {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            /* 下划线 */
+            text-decoration: none;
+        }
+
+        a,
+        p,
+        span {
+            font-size: 16px;
+            color: #606266;
+        }
+
+        a:hover {
+            color: #303133;
+        }
+
+
+
+        /* 头部样式 */
+        header {
+            width: 100%;
+            height: 80px;
+            background: #fff;
+            margin-bottom: 20px;
+        }
+
+        .top {
+            height: 80px;
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: start;
+            border-bottom: 1px solid #DCDFE6;
+        }
+
+        .top_left {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .top_left>img {
+            height: 50px;
+        }
+
+        .top_center {
+            flex-grow: 7;
+        }
+
+        .top_center>ul,
+        .top_right>ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+        }
+
+        .top_center>ul>li>a,
+        .top_right>ul>li>a {
+            font-weight: bold;
+        }
+
+        /* 下拉菜单中的导航条 */
+        .top_center>ul>li:first-child {
+            position: relative;
+        }
+
+        .top_center>ul>li:first-child:hover>ul {
+            /* height: 200px; */
+            opacity: 1;
+        }
+
+        .top_center>ul>li:first-child>ul {
+            z-index: 1;
+            /* overflow: hidden;
+            height: 0; */
+            position: absolute;
+            top: 40px;
+            left: -10px;
+            padding: 0px 10px;
+            width: 130px;
+            height: 200px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 3px 2px #DCDFE6;
+            /* 过渡属性 */
+            transition-property: all;
+            /* 过渡持续时间 */
+            transition-duration: 0.5s;
+            opacity: 0;
+        }
+
+        .top_center>ul>li:first-child>ul>li {
+            display: flex;
+            align-items: center;
+            line-height: 40px;
+            height: 40px;
+        }
+
+        .top_center>ul>li:first-child>ul>li>img {
+            height: 20px;
+        }
+
+        .top_center>ul>li:first-child>ul>li>a {
+            margin-left: 20px;
+            font-size: 13px;
+        }
+
+        .top_center>ul>li>a>i>img {
+            margin-left: 3px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .top_right {
+            flex-grow: 2;
+        }
+
+        .top_right>ul {
+            justify-content: space-around;
+        }
+
+        /* 导航样式 */
+        nav {
+            width: 80%;
+            height: 80px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            border: 1px solid #DCDFE6;
+        }
+
+        nav>ul {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+        }
+
+        nav>ul>li:first-child {
+            padding: 10px 30px;
+            background-color: rgba(135, 206, 235, 0.3);
+            border-radius: 5px;
+        }
+
+
+
+        /* 内容样式开始 */
+        #content {
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 60px;
+            margin-bottom: 70px;
+        }
+
+        .content {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .content>section {
+            width: 24%;
+        }
+
+        .content>section>section:first-child {
+            position: relative;
+        }
+
+        .content>section>section:first-child>img {
+            width: 100%;
+            border-radius: 5px;
+            min-width: 200px;
+        }
+
+        .content>section>section:first-child>section {
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .content>section>section:first-child>section>article {
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+            padding: 2px 5px;
+        }
+
+        .content>section>section:first-child>section>article:nth-child(1) {
+            margin-left: 5px;
+        }
+
+        .content>section>section:first-child>section>article:nth-child(2) {
+            margin-right: 5px;
+        }
+
+        .content>section>section:nth-child(2) {
+            min-width: 200px;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        .content>section>section:nth-child(2)>a {
+            color: #303133;
+        }
+
+        .content>section>section:last-child>article>span {
+            font-size: 12px;
+            min-width: 200px;
+        }
+
+        .content>section>section:last-child>article:first-child>span {
+            display: flex;
+            align-items: center;
+        }
+
+        .content>section>section:last-child>article:first-child>span>img {
+            width: 15px;
+            margin-right: 3px;
+        }
+
+        .content>section>section:last-child>article:first-child>span>span {
+            font-size: 12px;
+        }
+
+        /* 内容样式结束 */
+        /* 分页效果开始 */
+        #page {
+            display: flex;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto 50px;
+        }
+
+        #page>li>a {
+            border: 1px solid #DCDFE6;
+            padding: 8px 13px;
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+
+        #page>li>a:hover {
+            background-color: rgba(135, 206, 235, 0.2);
+        }
+
+        /* 分页效果结束 */
+        /* 底部样式开始 */
+        footer {
+            width: 100%;
+            background: #fff;
+        }
+
+        .footer {
+            width: 80%;
+            height: 350px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #DCDFE6;
+        }
+
+        .footer>section:nth-child(1) {
+            width: 50%;
+            position: relative;
+        }
+
+        .footer>section:nth-child(1)>img {
+            position: absolute;
+            width: 120px;
+            top: -40px;
+            left: 50%;
+            margin-left: -60px;
+        }
+
+        .footer>section:nth-child(1)>p {
+            margin-top: 40px;
+            /* 缩进 */
+            text-indent: 2em;
+            font-size: 14px;
+        }
+
+        .footer>section:nth-child(2) {
+            width: 40%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .footer>section:nth-child(2)>div>h6 {
+            font-size: 18px;
+            color: #909399;
+        }
+
+        .footer>section:nth-child(2)>div>ul {
+            margin-top: -20px;
+        }
+
+        .footer>section:nth-child(2)>div>ul>li {
+            margin-top: 10px;
+        }
+
+        .footer>section:nth-child(3) {
+            width: 10%;
+            /* position: relative;            */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer>section:nth-child(3)>img {
+            width: 30%;
+            margin-top: 80px;
+        }
+
+        .footer>section:nth-child(3)>span {
+            margin-top: 8px;
+        }
+
+        /* 底部样式结束 */
+
+        .pad {
+            display: none;
+        }
+
+        /* PC端样式 */
+        @media screen and (min-width: 960px) {
+            .top {
+                min-width: 960px;
+            }
+
+            nav {
+                min-width: 960px;
+            }
+
+            /* 内容区域 */
+            #content {
+                min-width: 960px;
+            }
+
+            /* 底部样式开始 */
+            .footer {
+                min-width: 960px;
+            }
+
+            /* 底部样式结束 */
+        }
+
+        /* pad端样式 */
+        @media screen and (max-width:960px) and (min-width: 750px) {
+
+            /* 头部样式开始 */
+
+            .top {
+                min-width: 750px;
+                width: 90%;
+            }
+
+            .top_center,
+            .top_right {
+                display: none;
+            }
+
+            .pad {
+                display: block;
+            }
+
+            .pad>img {
+                width: 30px;
+                margin-top: 25px;
+            }
+
+            .pad>div {
+                width: 100%;
+                height: 200px;
+                background: #fff;
+                border-bottom: 1px solid #DCDFE6;
+                position: absolute;
+                left: 0;
+                top: 81px;
+                z-index: 1;
+                /* 过渡属性 */
+                transition-property: all;
+                /* 过渡持续时间 */
+                transition-duration: 0.5s;
+                opacity: 0;
+            }
+
+            .pad>div>ul {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .pad>div>ul>li {
+                margin-top: 10px;
+            }
+
+            .pad>img:hover+div {
+                opacity: 1;
+            }
+
+            /* 头部样式结束 */
+
+            /* 导航样式开始 */
+            nav {
+                min-width: 750px;
+                width: 90%;
+            }
+
+            /* 导航样式结束 */
+
+            /* 内容样式开始 */
+            #content {
+                min-width: 750px;
+                width: 90%;
+                margin-bottom: 15px;
+            }
+
+            .content {
+                min-width: 750px;
+                flex-wrap: wrap;
+                margin-bottom: 0;
+            }
+
+            .content>section {
+                width: 49%;
+                margin-bottom: 40px;
+            }
+
+            /* 内容样式结束 */
+
+            /* 底部样式开始 */
+            .footer {
+                min-width: 750px;
+                width: 90%;
+            }
+
+            /* 底部样式结束 */
+
+        }
+
+        /* 手机端样式 */
+        @media screen and (max-width:750px) {
+
+            /* 头部样式开始 */
+
+            .top {
+                width: 90%;
+            }
+
+            .top_center,
+            .top_right {
+                display: none;
+            }
+
+            .pad {
+                display: block;
+            }
+
+            .pad>img {
+                width: 30px;
+                margin-top: 25px;
+            }
+
+            .pad>div {
+                width: 100%;
+                height: 200px;
+                background: #fff;
+                border-bottom: 1px solid #DCDFE6;
+                position: absolute;
+                left: 0;
+                top: 81px;
+                z-index: 1;
+                /* 过渡属性 */
+                transition-property: all;
+                /* 过渡持续时间 */
+                transition-duration: 0.5s;
+                opacity: 0;
+            }
+
+            .pad>div>ul {
+                width: 90%;
+                margin: 0 auto;
+            }
+
+            .pad>div>ul>li {
+                margin-top: 10px;
+            }
+
+            .pad>img:hover+div {
+                opacity: 1;
+            }
+
+            /* 头部样式结束 */
+
+            /* 导航样式开始 */
+            nav {
+                height: 130px;
+                width: 90%;       
+            }
+
+            nav>ul {
+                flex-wrap: wrap;
+                padding: 5px;
+            }
+
+            nav>ul>li {
+                width: 32%;
+                padding: 8px 0px;
+                text-align: center;
+            }
+
+            nav>ul>li:first-child {
+                padding: 10px 0;
+            }
+
+            /* 导航样式结束 */
+
+            /* 内容样式开始 */
+            #content {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .content {
+                min-width: 300px;
+                flex-wrap: wrap;
+                margin-bottom: 0;
+            }
+
+            .content>section {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+
+            /* 内容样式结束 */
+
+            /* 底部样式开始 */
+            .footer {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .footer>section:nth-child(1) {
+                width: 100%;
+            }
+
+            .footer>section:nth-child(2) {
+                display: none;
+            }
+
+            .footer>section:nth-child(3) {
+                display: none;
+            }
+
+            /* 底部样式结束 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <section class="top">
+            <section class="top_left"><img src="./static/font/bilibli.png" alt=""></section>
+            <section class="top_center">
+                <ul>
+                    <li>
+                        <a href="">主站<i><img src="./static/font/arrow-down.png" alt="">
+                            </i></a>
+
+                        <ul>
+                            <li><img src="./static/font/视频.png" alt=""><a href="">动画</a></li>
+                            <li><img src="./static/font/游戏.png" alt=""><a href="">游戏</a></li>
+                            <li><img src="./static/font/音乐.png" alt=""><a href="">音乐</a></li>
+                            <li><img src="./static/font/知识库.png" alt=""><a href="">知识</a></li>
+                            <li><img src="./static/font/生活.png" alt=""><a href="">生活</a></li>
+                        </ul>
+
+                    </li>
+                    <li><a href="">番剧</a></li>
+                    <li><a href="">影视</a></li>
+                    <li><a href="">游戏中心</a></li>
+                    <li><a href="">直播</a></li>
+                    <li><a href="">漫画</a></li>
+                    <li><a href="">赛事</a></li>
+                </ul>
+            </section>
+            <section class="top_right">
+                <ul>
+                    <li><a href="">注册</a></li>
+                    <li><a href="">登录</a></li>
+                </ul>
+            </section>
+            <section class="pad">
+                <img src="./static/font/菜单.png" alt="">
+                <div>
+                    <ul>
+                        <li><a href="">番剧</a></li>
+                        <li><a href="">影视</a></li>
+                        <li><a href="">游戏中心</a></li>
+                        <li><a href="">直播</a></li>
+                        <li><a href="">漫画</a></li>
+                        <li><a href="">赛事</a></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </header>
+    <!-- 导航开始 -->
+    <nav>
+        <ul>
+            <li><a href="">全部</a></li>
+            <li><a href="">动画</a></li>
+            <li><a href="">音乐</a></li>
+            <li><a href="">舞蹈</a></li>
+            <li><a href="">游戏</a></li>
+            <li><a href="">知识</a></li>
+            <li><a href="">科技</a></li>
+            <li><a href="">生活</a></li>
+            <li><a href="">体育</a></li>
+        </ul>
+    </nav>
+    <!-- 导航结束 -->
+    <!-- 内容区域开始 -->
+    <article id="content">
+        <section class="content">
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (1).webp" alt="">
+                    <section>
+                        <article>18.6万播放</article>
+                        <article>06:33</article>
+                    </section>
+                </section>
+                <section><a href="">How I Got My Job</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>SchelleyYuki</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (2).webp" alt="">
+                    <section>
+                        <article>56.6万播放</article>
+                        <article>04:15</article>
+                    </section>
+                </section>
+                <section><a href="">打上花火</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>米津玄师</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (3).webp" alt="">
+                    <section>
+                        <article>13.6万播放</article>
+                        <article>13:35</article>
+                    </section>
+                </section>
+                <section><a href="">分享程序员学习资源2020</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>SchelleyYuki</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (4).webp" alt="">
+                    <section>
+                        <article>5.2万播放</article>
+                        <article>03:43</article>
+                    </section>
+                </section>
+                <section><a href="">如何高效学习</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>滨旭BRADY</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+        </section>
+
+        <section class="content">
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (5).webp" alt="">
+                    <section>
+                        <article>10.3万播放</article>
+                        <article>02:53</article>
+                    </section>
+                </section>
+                <section><a href="">Isn't She Lovely</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>xxx</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (6).webp" alt="">
+                    <section>
+                        <article>35.0万播放</article>
+                        <article>10:35</article>
+                    </section>
+                </section>
+                <section><a href="">华为Mate40评测</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>大米评测</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (7).webp" alt="">
+                    <section>
+                        <article>296.1万播放</article>
+                        <article>07:11</article>
+                    </section>
+                </section>
+                <section><a href="">《原神》璃月音乐录制实拍视频</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>原神</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (8).webp" alt="">
+                    <section>
+                        <article>547.5万播放</article>
+                        <article>05:21</article>
+                    </section>
+                </section>
+                <section><a href="">《原神》可莉角色PV</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>原神</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+        </section>
+
+        <section class="content">
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (9).webp" alt="">
+                    <section>
+                        <article>81.2万播放</article>
+                        <article>05:44</article>
+                    </section>
+                </section>
+                <section><a href="">没什么大不了 RADWIMPS</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>xxx</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720（10）.webp" alt="">
+                    <section>
+                        <article>86.0万播放</article>
+                        <article>04:37</article>
+                    </section>
+                </section>
+                <section><a href="">白日 / 夏色祭&律可</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>夏色祭Official</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720（11）.webp" alt="">
+                    <section>
+                        <article>7.8万播放</article>
+                        <article>03:47</article>
+                    </section>
+                </section>
+                <section><a href="">【武士桑】「白日」</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>武士桑</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <img src="./static/img/hq720 (12).webp" alt="">
+                    <section>
+                        <article>110.4万播放</article>
+                        <article>04:03</article>
+                    </section>
+                </section>
+                <section><a href="">米津玄師 - LOSER</a></section>
+                <section>
+                    <article>
+                        <span>
+                            <img src="./static/font/人.png" alt="">
+                            <span>xxx</span>
+                        </span>
+                    </article>
+                </section>
+            </section>
+        </section>
+    </article>
+    <!-- 内容区域结束 -->
+    <!-- 分页区域开始 -->
+    <ul id="page">
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href="">6</a></li>
+    </ul>
+    <!-- 分页区域结束 -->
+    <!-- 底部区域开始 -->
+    <footer>
+        <section class="footer">
+            <section>
+                <img src="./static/font/bilibli.png" alt="">
+                <p>
+                    哔哩哔哩（Nasdaq：BILI；英文名称：bilibili，简称B站）现为中国年轻世代高度聚集的文化社区和视频平台，该网站于2009年6月26日创建，被粉丝们亲切地称为“B站” [1-2]
+                    。2018年3月28日，哔哩哔哩在美国纳斯达克上市 [3] 。2020年9月15日，B站定制的视频遥感卫星——“哔哩哔哩视频卫星”成功升空 [4] 。
+                    B站早期是一个ACG（动画、漫画、游戏）内容创作与分享的视频网站。 [5-6]
+                    经过十年多的发展，围绕用户、创作者和内容，构建了一个源源不断产生优质内容的生态系统，B站已经涵盖7000多个兴趣圈层的多元文化社区，曾获得QuestMobile研究院评选的“Z世代偏爱APP”和“Z世代偏爱泛娱乐APP”两项榜单第一名并入选“BrandZ”报告2019最具价值中国品牌100强
+                    [2] [7-9] 。
+                </p>
+            </section>
+            <section>
+                <div>
+                    <h6>pilipili</h6>
+                    <ul>
+                        <li><a href="">关于我们</a></li>
+                        <li><a href="">联系我们</a></li>
+                        <li><a href="">用户协议</a></li>
+                        <li><a href="">加入我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>传送门</h6>
+                    <ul>
+                        <li><a href="">协议汇总</a></li>
+                        <li><a href="">活动中心</a></li>
+                        <li><a href="">活动主题页</a></li>
+                        <li><a href="">侵权申诉</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6>其他</h6>
+                    <ul>
+                        <li><a href="">帮助中心</a></li>
+                        <li><a href="">用户反馈论坛</a></li>
+                        <li><a href="">壁纸</a></li>
+                        <li><a href="">广告合作</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <img src="./static/font/下载.png" alt="">
+                <span>下载APP</span>
+            </section>
+        </section>
+    </footer>
+    <!-- 底部区域结束 -->
+</body>
+
+</html>
